@@ -1,29 +1,51 @@
 package ups;
 
+//Manages information for each Trailer object.
 public class Trailer {
-    private String id;
-    private int origin;
+    public static final double UNLOAD_RATE = 0.33; //packages per second.
 
-    //Volume Mix
-    private int volume;
-    private int smalls;
-    private int bags;
-    private int handles;
+    //*******************************************************//
+    //The following fields are determined from the excel file//
+    //*******************************************************//
 
-    //Plan
-    private double planHours;
-    private double planStart;
-    private double planFinish;
+    //Trailer Identification.
+    private int identificationNumber; //Trailer ID number.
+    private int originNumber; //Origin center number.
 
-    private int door;
-    private double trailerPercentage;
-    private double start;
-    private double finish;
-    private double clearCall;
-    private boolean loadQuality;
+    //Volume Distribution.
+    private int volume; //Total amount of pieces.
+    private int smalls; //Total amount of small bagged packages.
+    private int bags; //Total amount of bags.
+    private int handles; //How many handles the unloader will have.
 
-    //Progress in minutes
-    private double min30;
-    private double min60;
-    private double min90;
+    //Pre-determined plan times.
+    private double planHours; //Amount of times set for unloader to finish trailer.
+    private double planStart; //Planned start time.
+    private double planFinish; //Planned finish time.
+
+    //*************************************************//
+    //The following fields are determined by the client//
+    //*************************************************//
+
+    //Door Information
+    private int bayDoorNumber; //Bay door on which the trailer is parked.
+    private double currentPercentage; //Percentage upon opening.
+
+    //Actual plan times.
+    private double actualStart;
+    private boolean warningReady;
+    private double actualFinish;
+
+    //Progress percentage intervals.
+    private double minute30;
+    private double minute60;
+    private double minute90;
+    private double timeCalledClear;
+
+
+
+    public Trailer(int[] trailerInfo, int[] volumeInfo, double[] planTimes) {
+
+    }
 }
+
