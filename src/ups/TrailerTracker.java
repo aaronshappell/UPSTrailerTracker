@@ -9,10 +9,14 @@ import java.io.IOException;
 import java.util.*;
 
 public class TrailerTracker {
-    public static void main(String[] args) throws IOException, InvalidFormatException {
-        //Each trailer will be linked by its identification number.
-        Map<Integer, Trailer> trailers = new TreeMap<Integer, Trailer>();
+    private Map<Integer, Trailer> trailers;
 
+    public TrailerTracker(){
+        trailers = new TreeMap<Integer, Trailer>();
+    }
+
+    public void loadExcelFile(String excelFile) throws IOException, InvalidFormatException {
+        //Each trailer will be linked by its identification number.
         //Process the excel file.
         DataFormatter dataFormatter = new DataFormatter();
         Workbook workbook = WorkbookFactory.create(new File("./data/UnloadSchedule.xlsx"));
@@ -41,9 +45,16 @@ public class TrailerTracker {
     }
 
     //Trims origin code into a 6 digit identification number.
-    public int trimIdentificationNumber() {
-
-
+    public int trimIdentificationNumber(String rawNumber) {
         return 0;
+    }
+
+    public static void main(String[] args) {
+        TrailerTracker tracker = new TrailerTracker();
+        try {
+            tracker.loadExcelFile("./data/UnloadSchedule.xlsx");
+        } catch (IOException | InvalidFormatException e) {
+            e.printStackTrace();
+        }
     }
 }
