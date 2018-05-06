@@ -31,8 +31,11 @@ repositories {
 }
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.apache.poi:poi:3.17')
 	compile('org.apache.poi:poi-ooxml:3.17')
+	compile('javax.xml.bind:jaxb-api')
+	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

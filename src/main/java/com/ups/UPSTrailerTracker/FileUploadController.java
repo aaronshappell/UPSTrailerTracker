@@ -9,12 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class FileUploadController {
-    private final StorageService storageService;
-
     @Autowired
-    public FileUploadController(StorageService storageService){
-        this.storageService = storageService;
-    }
+    private StorageService storageService;
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file){
