@@ -22,11 +22,15 @@ public class UpsTrailerTrackerApplication {
 			storageService.init();
 
 			//identifactionNumber, originNumber, volume, smalls, bags, handles, planHours
-			double[] trailerInfo = {
-				2, 43653, 12000, 500, 35, 4, 11
+			double[] trailerInfo1 = {
+					2, 43653, 12000, 500, 35, 4, 11
+			};
+			double[] trailerInfo2 = {
+					1, 32156, 13200, 230, 31, 2, 12
 			};
 
-			trailerService.addTrailer(new Trailer(trailerInfo));
+			trailerService.addTrailer(new Trailer(trailerInfo1));
+			trailerService.addTrailer(new Trailer(trailerInfo2));
 		};
 	}
 }

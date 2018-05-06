@@ -52,7 +52,7 @@ public class Trailer {
     private double minute90;
     private double timeCalledClear;
 
-
+    protected Trailer(){}
 
     public Trailer(double[] trailerInfo) {
         identificationNumber = (int) trailerInfo[0];
