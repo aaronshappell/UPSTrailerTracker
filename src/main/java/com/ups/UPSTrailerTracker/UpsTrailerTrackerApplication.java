@@ -16,11 +16,10 @@ public class UpsTrailerTrackerApplication {
 	}
 
 	@Bean
-	CommandLineRunner init(StorageService storageService, GreetingService greetingService){
+	CommandLineRunner init(StorageService storageService){
 		return (args) -> {
 			storageService.deleteAll();
 			storageService.init();
-			greetingService.addGreeting(new Greeting("asdfasdf"));
 		};
 	}
 }
