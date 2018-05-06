@@ -1,7 +1,17 @@
 package com.ups.UPSTrailerTracker;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 //Manages information for each Trailer object.
+@Entity
 public class Trailer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     public static final double UNLOAD_RATE = 0.33; //packages per second.
 
     //*******************************************************//
