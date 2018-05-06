@@ -20,6 +20,13 @@ public class UpsTrailerTrackerApplication {
 		return (args) -> {
 			storageService.deleteAll();
 			storageService.init();
+
+			//identifactionNumber, originNumber, volume, smalls, bags, handles, planHours
+			double[] trailerInfo = {
+				2, 43653, 12000, 500, 35, 4, 11
+			};
+
+			trailerService.addTrailer(new Trailer(trailerInfo));
 		};
 	}
 }

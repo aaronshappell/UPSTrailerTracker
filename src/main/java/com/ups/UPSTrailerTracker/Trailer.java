@@ -70,8 +70,6 @@ public class Trailer {
         //Column 4 : Number of Bags : Double
         //Column 5 : Number of Handles : Double
         //Column 6 : Planned Hours : Double
-
-
     }
 }
 
