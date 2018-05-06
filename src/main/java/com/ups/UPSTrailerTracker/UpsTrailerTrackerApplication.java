@@ -16,7 +16,7 @@ public class UpsTrailerTrackerApplication {
 	}
 
 	@Bean
-	CommandLineRunner init(StorageService storageService){
+	CommandLineRunner init(StorageService storageService, TrailerService trailerService){
 		return (args) -> {
 			storageService.deleteAll();
 			storageService.init();
