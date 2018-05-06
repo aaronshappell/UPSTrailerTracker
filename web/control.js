@@ -7,15 +7,18 @@
     };
 
     function checkLoginInfo() {
-        userLogin = $('login').innerText;
-        userPass = $('pass').innerText;
+        let userLogin = $('login').value;
+        let userPass = $('pass').value;
+        //console.log(userLogin);
+        //console.log(userPass);
         if (userLogin == "login" && userPass == "pass") {
+
             console.log("true");
-            //location.href = "core.html";
+            location.href = "core.html";
         }
     }
 
     function $(id) {
         return document.getElementById(id);
     }
- });
+ })();
