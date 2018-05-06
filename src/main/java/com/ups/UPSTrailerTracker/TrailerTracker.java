@@ -27,32 +27,44 @@ public class TrailerTracker {
             rowIterator.next();
         }
 
+        //Process data needed.
         while(rowIterator.hasNext()) {
             Row row = rowIterator.next();
 
             Iterator<Cell> cellIterator = row.cellIterator();
 
-            double num;
-            String str;
+            double num = -1;
 
+            //Only uses 7 cells within the row.
+            //Use array to temporarily store double values;
+            double[] values = new double[7];
 
             for(int i = 0; i <= 6; i++) {
                 Cell cell = cellIterator.next();
 
-                if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+
+                //Must check if the cell is a Formula or normal cell type.
+                if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
                     num = cell.getNumericCellValue();
-                } else if(cell.getCellType() == Cell.CELL_TYPE_STRING) {
-                    str = cell.getStringCellValue();
-                } else if(cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+                } else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                    //Check if the cell is empty.
+                    if (!cell.getStringCellValue().equals("")) {
+                        num = trimIdentificationNumber(cell.getStringCellValue());
+                    }
+                } else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
                     switch (cell.getCachedFormulaResultType()) {
                         case Cell.CELL_TYPE_NUMERIC:
                             num = cell.getNumericCellValue();
                             break;
                         case Cell.CELL_TYPE_STRING:
-                            str = cell.getStringCellValue();
+                            //Check if the cell is empty. Again.
+                            if (!cell.getStringCellValue().equals("")) {
+                                num = trimIdentificationNumber(cell.getStringCellValue());
+                            }
                             break;
                     }
                 }
+                values[i] = num;
             }
             //Column 1 : Trailer Number : String
             //Column 2 : Origin Number : Double
@@ -62,57 +74,19 @@ public class TrailerTracker {
             //Column 6 : Number of Handles : Double
             //Column 7 : Planned Hours : Double
             //Anything beyond is inputed by the user, skip to the next line.
-
-
         }
-        /*while (rowIterator.hasNext()) {
-            Row row = rowIterator.next();
-
-            Iterator<Cell> cellIterator = row.cellIterator();
-            while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
-                double num = 0;
-                String str = "";
-                if(cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
-                    switch(cell.getCachedFormulaResultType()) {
-                        case Cell.CELL_TYPE_NUMERIC:
-                            num = cell.getNumericCellValue();
-                            System.out.println(num);
-                            break;
-                        case Cell.CELL_TYPE_STRING:
-                            str = cell.getRichStringCellValue();
-                            System.out.println(str);
-                            break;
-                    }
-                } else {
-                    switch(cell.getCellType()) {
-                        case Cell.CELL_TYPE_NUMERIC:
-                            num = cell.getNumericCellValue();
-                            System.out.println(num);
-                            break;
-                        case Cell.CELL_TYPE_STRING:
-                            str = cell.getRichStringCellValue();
-                            System.out.println(str);
-                            break;
-                    }
-                }
-
-                //Column 1 : Trailer Number : String
-                //Column 2 : Origin Number : Double
-                //Column 3 : Volume Number : Double
-                //Column 4 : Smalls Number : Double
-                //Column 5 : Number of Bags : Double
-                //Column 6 : Number of Handles : Double
-                //Column 7 : Planned Hours : Double
-                //Anything beyond is inputed by the user, skip to the next line.
-
-            }
-        }*/
     }
 
     //Trims origin code into a 6 digit identification number.
     public int trimIdentificationNumber(String rawNumber) {
-        return 0;
+
+        String str = rawNumber.replaceAll("[^\\d]", "");
+
+        if(str.isEmpty()) {
+            return -1;
+        }
+
+        return Integer.parseInt(str);
     }
 
     public static void main(String[] args) {
