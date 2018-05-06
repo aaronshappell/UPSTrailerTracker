@@ -44,7 +44,23 @@ public class Trailer {
 
 
 
-    public Trailer(int[] trailerInfo, int[] volumeInfo, double[] planTimes) {
+    public Trailer(double[] trailerInfo) {
+        identificationNumber = (int) trailerInfo[0];
+        originNumber = (int) trailerInfo[1];
+        volume = (int) trailerInfo[2];
+        smalls = (int) trailerInfo[3];
+        bags = (int) trailerInfo[4];
+        handles = (int) trailerInfo[5];
+        planHours = trailerInfo[6];
+
+        //Column 0 : Trailer Number : String
+        //Column 1 : Origin Number : Double
+        //Column 2 : Volume Number : Double
+        //Column 3 : Smalls Number : Double
+        //Column 4 : Number of Bags : Double
+        //Column 5 : Number of Handles : Double
+        //Column 6 : Planned Hours : Double
+
 
     }
 }
