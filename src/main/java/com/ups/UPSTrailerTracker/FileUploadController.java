@@ -11,37 +11,48 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @RestController
 public class FileUploadController {
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private TrailerService trailerService;
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file){
         storageService.store(file);
 
         String fileName = file.getOriginalFilename();
+        List<Trailer> trailers = null;
         if(fileName.length() >= 5 && fileName.substring(fileName.length() - 5).equals(".xlsx")) {
             try {
-                loadExcelFile("./uploadDir/UnloadSchedule.xlsx");
+                //loadExcelFile(storageService.load(fileName).toString());
+                trailers = extractTrailers(storageService.load(fileName).toString());
             } catch (IOException | InvalidFormatException e) {
                 System.out.println("Error loading excel file, invalid format");
                 e.printStackTrace();
             }
-        } else {
-            storageService.deleteAll();
-            storageService.init();
         }
+        if(trailers != null){ // Trailer objects successfully extracted
+            for(Trailer trailer : trailers){
+                trailerService.addTrailer(trailer);
+            }
+        }
+        storageService.deleteAll();
+        storageService.init();
 
         return "Successfully uploaded " + fileName;
     }
 
-    public void loadExcelFile(String excelFile) throws IOException, InvalidFormatException {
-        //Process the excel file.
-        Workbook workbook = WorkbookFactory.create(new File("./data/UnloadSchedule.xlsx"));
+    public List<Trailer> extractTrailers(String excelFile) throws IOException, InvalidFormatException {
+        List<Trailer> trailers = new ArrayList<Trailer>();
 
+        //Process the excel file.
+        Workbook workbook = WorkbookFactory.create(new File(excelFile));
         Sheet sheet = workbook.getSheetAt(0);
 
         Iterator<Row> rowIterator = sheet.rowIterator();
@@ -89,8 +100,7 @@ public class FileUploadController {
                     }
                 }
                 values[i] = num;
-
-                Trailer trailer1 = new Trailer(values);
+                trailers.add(new Trailer(values));
             }
             //Column 0 : Trailer Number : String
             //Column 1 : Origin Number : Double
@@ -100,10 +110,12 @@ public class FileUploadController {
             //Column 5 : Number of Handles : Double
             //Column 6 : Planned Hours : Double
         }
+
+        return trailers;
     }
 
     //Trims origin code into a 6 digit identification number.
-    public int trimIdentificationNumber(String rawNumber) {
+    private int trimIdentificationNumber(String rawNumber) {
 
         String str = rawNumber.replaceAll("[^\\d]", "");
 
@@ -113,9 +125,4 @@ public class FileUploadController {
 
         return Integer.parseInt(str);
     }
-
-    /*
-    Will we need GET to retrieve uploaded files?
-    Or just temporarily upload to extract data and then delete?
-     */
 }
