@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TrailerRepository extends CrudRepository<Trailer, Integer> {
+	List<Trailer> findAll();
 }

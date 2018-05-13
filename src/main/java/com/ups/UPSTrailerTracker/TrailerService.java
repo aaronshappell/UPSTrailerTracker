@@ -15,6 +15,6 @@ public class TrailerService {
     }
 
     public List<Trailer> getTrailers(){
-        return (List) trailerRepository.findAll();
+        return trailerRepository.findAll();
     }
 }
