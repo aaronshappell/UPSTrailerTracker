@@ -43,7 +43,7 @@ class TrailerTracker {
                 }
                 values[i] = num
             }
-            val trailer: Trailer = Trailer(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
+            val trailer: Trailer = Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(), values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6])
             //Column 0 : Trailer Number : String
             //Column 1 : Origin Number : Double
             //Column 2 : Volume Number : Double
