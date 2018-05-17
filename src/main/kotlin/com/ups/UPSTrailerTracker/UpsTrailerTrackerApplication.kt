@@ -17,12 +17,8 @@ class UpsTrailerTrackerApplication {
 			storageService.deleteAll()
 			storageService.init()
 
-			//identifactionNumber, originNumber, volume, smalls, bags, handles, planHours
-			Array<Double> trailerInfo1 = arrayOf(2, 43653, 12000, 500, 35, 4, 11)
-			Array<Double> trailerInfo1 = arrayOf(1, 32156, 13200, 230, 31, 2, 12)
-
-			trailerService.addTrailer(Trailer(trailerInfo1));
-			trailerService.addTrailer(Trailer(trailerInfo2));
+			trailerService.addTrailer(Trailer(2, 43653, 12000, 500, 35, 4, 11.0))
+			trailerService.addTrailer(Trailer(1, 32156, 13200, 230, 31, 2, 12.0))
 		}
 	}
 }
