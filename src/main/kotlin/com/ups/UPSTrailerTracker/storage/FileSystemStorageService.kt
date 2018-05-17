@@ -3,6 +3,7 @@ package com.ups.UPSTrailerTracker.storage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.core.io.UrlResource
+import org.springframework.stereotype.Service
 import org.springframework.util.FileSystemUtils
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
@@ -15,6 +16,7 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.stream.Stream
 
+@Service
 class FileSystemStorageService(@Autowired properties: StorageProperties, private val rootLocation: Path = Paths.get(properties.location)) : StorageService {
     override fun init() {
         Files.createDirectories(rootLocation)
