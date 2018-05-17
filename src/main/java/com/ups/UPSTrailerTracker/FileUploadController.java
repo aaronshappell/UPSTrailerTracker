@@ -100,8 +100,8 @@ public class FileUploadController {
                     }
                 }
                 values[i] = num;
-                trailers.add(new Trailer(values));
             }
+            trailers.add(new Trailer(values));
             //Column 0 : Trailer Number : String
             //Column 1 : Origin Number : Double
             //Column 2 : Volume Number : Double

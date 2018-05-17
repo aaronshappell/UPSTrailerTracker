@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner
 public class UpsTrailerTrackerApplicationTests {
 
 	@Test
-	public void contextLoads() {
-	}
+	fun contextLoads() {}
 
 }

@@ -61,9 +61,8 @@ public class TrailerTracker {
                     }
                 }
                 values[i] = num;
-
-                Trailer trailer1 = new Trailer(values);
             }
+            Trailer trailer1 = new Trailer(values);
             //Column 0 : Trailer Number : String
             //Column 1 : Origin Number : Double
             //Column 2 : Volume Number : Double
