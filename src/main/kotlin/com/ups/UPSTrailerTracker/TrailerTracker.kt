@@ -12,7 +12,7 @@ class TrailerTracker {
         val rowIterator: Iterator<Row> = sheet.rowIterator()
 
         //Pre-process to row 7 for data.
-        for(i in 1..6){
+        for(i in 1..7){
             rowIterator.next()
         }
 
@@ -33,12 +33,12 @@ class TrailerTracker {
                 } else if(cell.cellType == Cell.CELL_TYPE_STRING){
                     //Check if the cell is empty.
                     if(cell.stringCellValue != ""){
-                        num = trimIdNumber(cell.stringCellValue).toDouble()
+                        num = trimTrailerNumber(cell.stringCellValue).toDouble()
                     }
                 } else if(cell.cellType == Cell.CELL_TYPE_FORMULA){
                     when(cell.cachedFormulaResultType){
                         Cell.CELL_TYPE_NUMERIC -> num = cell.numericCellValue
-                        Cell.CELL_TYPE_STRING -> if(cell.stringCellValue != ""){num = trimIdNumber(cell.stringCellValue).toDouble()}
+                        Cell.CELL_TYPE_STRING -> if(cell.stringCellValue != ""){num = trimTrailerNumber(cell.stringCellValue).toDouble()}
                     }
                 }
                 values[i] = num
@@ -54,7 +54,7 @@ class TrailerTracker {
         }
     }
 
-    fun trimIdNumber(rawNumber: String): Int {
+    fun trimTrailerNumber(rawNumber: String): Int {
         val str = rawNumber.replace("[^\\d]".toRegex(), "")
         if(str.isEmpty()){
             return -1

@@ -8,7 +8,7 @@ class TrailerService {
     @Autowired
     lateinit var trailerRepository: TrailerRepository
 
-    fun AddTrailer(trailer: Trailer) {
+    fun addTrailer(trailer: Trailer) {
         trailerRepository.save(trailer)
     }
 
