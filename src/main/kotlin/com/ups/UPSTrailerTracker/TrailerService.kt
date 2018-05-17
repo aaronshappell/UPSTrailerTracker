@@ -12,5 +12,5 @@ class TrailerService {
         trailerRepository.save(trailer)
     }
 
-    fun getTrailers(): List<Trailer> = trailerRepository.findAll()
+    fun getTrailers(): ArrayList<Trailer> = trailerRepository.findAll()
 }

@@ -21,7 +21,7 @@ class FileUploadController {
         storageService.store(file)
 
         val fileName: String = file.originalFilename as String
-        var trailers: List<Trailer>? = null
+        var trailers: ArrayList<Trailer>? = null
         if(fileName.length >= 5 && fileName.substring(fileName.length - 5) == ".xlsx") {
             trailers = extractTrailers(storageService.load(fileName).toString())
         }
@@ -36,9 +36,8 @@ class FileUploadController {
         return "Successfully uploaded $fileName"
     }
 
-    fun extractTrailers(excelFile: String): List<Trailer> {
-        val trailers: List<Trailer> = ArrayList<Trailer>()
-
+    fun extractTrailers(excelFile: String): ArrayList<Trailer> {
+        val trailers: ArrayList<Trailer> = ArrayList<Trailer>()
         //Process the excel file
         val workbook: Workbook = WorkbookFactory.create(File(excelFile))
         val sheet: Sheet = workbook.getSheetAt(0)

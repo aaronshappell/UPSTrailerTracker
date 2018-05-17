@@ -10,5 +10,5 @@ class TrailerController {
     lateinit var trailerService: TrailerService
 
     @GetMapping("/trailers")
-    fun trailers(): List<Trailer> = trailerService.getTrailers()
+    fun trailers(): ArrayList<Trailer> = trailerService.getTrailers()
 }

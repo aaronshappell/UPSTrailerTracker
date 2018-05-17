@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TrailerRepository : CrudRepository<Trailer, Long> {
-    override fun findAll(): List<Trailer>
+    override fun findAll(): ArrayList<Trailer>
 }
