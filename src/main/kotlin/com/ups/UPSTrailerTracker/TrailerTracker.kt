@@ -65,11 +65,5 @@ class TrailerTracker {
 
 fun main(args: Array<String>) {
     val tracker: TrailerTracker = TrailerTracker()
-    try {
-        tracker.loadExcelFile("./data/UnloadSchedule.xlsx")
-    } catch (e: IOException) {
-        e.printStackTrace()
-    } catch (e: InvalidFormatException) {
-        e.printStackTrace()
-    }
+    tracker.loadExcelFile("./data/UnloadSchedule.xlsx")
 }
