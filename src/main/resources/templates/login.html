@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/css/loginstyle.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div th:fragment="content">
+        <h1>UPS Tracker Application</h1>
+        <fieldset>
+            <legend>Enter your information</legend>
+            <p>Login:</p>
+            <input type="text" id="login">
+            <br>
+            <p>Password:</p>
+            <input type="text" id="pass">
+            <button id="submit">Submit!</button>
+        </fieldset>
+    </div>
+</body>
+</html>
