@@ -13,6 +13,9 @@ class TrailerController {
     @Autowired
     lateinit var trailerService: TrailerService
 
+    @GetMapping("/")
+    fun home(): String = "redirect:/trailers"
+
     @GetMapping("/trailers")
     fun getTrailersView(model: Model): String {
         model.addAttribute("trailers", trailerService.getTrailers())
