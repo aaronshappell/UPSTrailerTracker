@@ -1,6 +1,8 @@
 package com.ups.UPSTrailerTracker
 
 import com.ups.UPSTrailerTracker.storage.StorageService
+import com.ups.UPSTrailerTracker.trailer.Trailer
+import com.ups.UPSTrailerTracker.trailer.TrailerService
 import org.apache.poi.ss.usermodel.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping

@@ -1,4 +1,4 @@
-package com.ups.UPSTrailerTracker
+package com.ups.UPSTrailerTracker.trailer
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

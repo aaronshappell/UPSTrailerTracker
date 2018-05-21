@@ -1,4 +1,4 @@
-package com.ups.UPSTrailerTracker
+package com.ups.UPSTrailerTracker.trailer
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository

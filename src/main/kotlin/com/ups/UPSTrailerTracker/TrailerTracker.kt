@@ -1,9 +1,8 @@
 package com.ups.UPSTrailerTracker
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException
+import com.ups.UPSTrailerTracker.trailer.Trailer
 import org.apache.poi.ss.usermodel.*
 import java.io.File
-import java.io.IOException
 
 class TrailerTracker {
     fun loadExcelFile(excelFile: String) {

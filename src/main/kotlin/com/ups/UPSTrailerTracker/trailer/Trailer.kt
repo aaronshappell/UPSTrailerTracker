@@ -1,4 +1,4 @@
-package com.ups.UPSTrailerTracker
+package com.ups.UPSTrailerTracker.trailer
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
