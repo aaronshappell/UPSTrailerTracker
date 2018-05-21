@@ -12,7 +12,16 @@
 </head>
 <body>
     <div class="jumbotron text-center">
-        <h1>UPS Trailer Tracker</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <img th:src="@{/images/logo.svg}" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h1>UPS Trailer Tracker</h1>
+                </div>
+            </div>
+        </div>
     </div>
     <div th:replace="${view} :: content"/>
     <!-- Put footer here -->

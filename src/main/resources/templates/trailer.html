@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head"></head>
+<body>
+    <div class="container" th:fragment="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="trailerNumber">Trailer #</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.trailerNumber}" placeholder="Trailer #" aria-label="Trailer #" aria-describedby="trailerNumber" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="originNumber">Origin #</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.originNumber}" placeholder="Origin #" aria-label="Origin #" aria-describedby="originNumber" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="volume">Volume</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.volume}" placeholder="Volume" aria-label="Volume" aria-describedby="volume" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="smalls">Smalls</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.smalls}" placeholder="Smalls" aria-label="Smalls" aria-describedby="smalls" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="bags">Bags</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.bags}" placeholder="Bags" aria-label="Bags" aria-describedby="bags" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="handles">Handles</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.handles}" placeholder="Handles" aria-label="Handles" aria-describedby="handles" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="planHours">Plan Hours</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.planHours}" placeholder="Plan Hours" aria-label="Plan Hours" aria-describedby="planHours" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="planStart">Plan Start</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.planStart}" placeholder="Plan Start" aria-label="Plan Start" aria-describedby="planStart">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="planFinish">Plan Finish</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.planFinish}" placeholder="Plan Finish" aria-label="Plan Finish" aria-describedby="planFinish">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="bayDoorNumber">Bay Door #</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.bayDoorNumber}" placeholder="Bay Door #" aria-label="Bay Door #" aria-describedby="bayDoorNumber">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="currentPercentage">Current %</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.currentPercentage}" placeholder="Current %" aria-label="Current %" aria-describedby="currentPercentage">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="actualStart">Actual Start</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.actualStart}" placeholder="Actual Start" aria-label="Actual Start" aria-describedby="actualStart">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="warningReady">Warning Ready</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.warningReady}" placeholder="Warning Ready" aria-label="Warning Ready" aria-describedby="warningReady">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="actualFinish">Actual Finish</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.actualFinish}" placeholder="Actual Finish" aria-label="Actual Finish" aria-describedby="actualFinish">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="minute30">Minute 30</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.minute30}" placeholder="Minute 30" aria-label="Minute 30" aria-describedby="minute30">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="minute60">Minute 60</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.minute60}" placeholder="Minute 60" aria-label="Minute 60" aria-describedby="minute60">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="minute90">Minute 90</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.minute90}" placeholder="Minute 90" aria-label="Minute 90" aria-describedby="minute90">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="timeCalledClear">Time Called Clear</span>
+                    </div>
+                    <input type="text" class="form-control" th:value="${trailer.timeCalledClear}" placeholder="Time Called Clear" aria-label="Time Called Clear" aria-describedby="timeCalledClear">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md" align="right">
+                <button class="btn btn-primary" type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

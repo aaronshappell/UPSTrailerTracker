@@ -13,4 +13,8 @@ class TrailerService {
     }
 
     fun getTrailers(): ArrayList<Trailer> = trailerRepository.findAll()
+
+    fun getTrailer(id: Long): Trailer? {
+        return trailerRepository.findById(id).orElse(null)
+    }
 }
