@@ -14,6 +14,9 @@
 * add footer
 	* contact info?
 	* copyright
+* add upload page
+    * form to upload file
+    * only for certain users? (e.g. manager)
 
 ## Backend
 * fix excel trailer extraction
