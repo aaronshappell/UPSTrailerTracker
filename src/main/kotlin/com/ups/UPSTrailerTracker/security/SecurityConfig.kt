@@ -30,6 +30,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutSuccessUrl("/login")
                 .permitAll()
         http.csrf().disable() // temporary for h2 db
         http.headers().frameOptions().disable() // temporary for h2 db
