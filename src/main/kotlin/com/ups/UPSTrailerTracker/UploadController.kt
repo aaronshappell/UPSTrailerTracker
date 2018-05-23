@@ -5,21 +5,31 @@ import com.ups.UPSTrailerTracker.trailer.Trailer
 import com.ups.UPSTrailerTracker.trailer.TrailerService
 import org.apache.poi.ss.usermodel.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 
-@RestController
-class FileUploadController {
+@Controller
+class UploadController {
     @Autowired
     lateinit var storageService: StorageService
     @Autowired
     lateinit var trailerService: TrailerService
 
-    @PostMapping("/")
-    fun handleFileUpload(@RequestParam("file") file: MultipartFile): String {
+    @GetMapping("/upload")
+    fun getUploadView(model: Model): String {
+        model.addAttribute("view", "upload")
+        return "layout"
+    }
+
+    @PostMapping("/upload")
+    @ResponseBody
+    fun uploadFile(@RequestParam("file") file: MultipartFile): String {
         storageService.store(file)
 
         val fileName: String = file.originalFilename as String
@@ -38,7 +48,7 @@ class FileUploadController {
         return "Successfully uploaded $fileName"
     }
 
-    fun extractTrailers(excelFile: String): ArrayList<Trailer> {
+    private fun extractTrailers(excelFile: String): ArrayList<Trailer> {
         val trailers: ArrayList<Trailer> = ArrayList<Trailer>()
         //Process the excel file
         val workbook: Workbook = WorkbookFactory.create(File(excelFile))
@@ -93,7 +103,7 @@ class FileUploadController {
     }
 
     //Trims origin code into a 6 digit identification number.
-    fun trimTrailerNumber(rawNumber: String): Int {
+    private fun trimTrailerNumber(rawNumber: String): Int {
         val str: String = rawNumber.replace("[^\\d]".toRegex(), "")
         if(str.isEmpty()){
             return -1
