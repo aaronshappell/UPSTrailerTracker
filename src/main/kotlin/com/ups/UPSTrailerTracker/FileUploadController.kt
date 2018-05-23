@@ -58,6 +58,8 @@ class FileUploadController {
 
             val values: Array<Double> = Array(7, {0.0})
 
+            cellIterator.next()
+
             for(i in 0..6){
                 val cell: Cell = cellIterator.next()
 
