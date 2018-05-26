@@ -13,13 +13,11 @@
 <body>
     <div class="jumbotron text-center">
         <div class="container">
-            <div sec:authorize="isAuthenticated()">
-                <div class="row justify-content-md-end">
-                    <div class="col-sm-3">
-                        <form th:action="@{/logout}">
-                            <button type="submit" class="btn btn-sm btn-primary"><img th:src="@{/images/logout.svg}" class="img-fluid">Logout</button>
-                        </form>
-                    </div>
+            <div sec:authorize="isAuthenticated()" class="row justify-content-md-end">
+                <div class="col-sm-3">
+                    <form th:action="@{/logout}">
+                        <button type="submit" class="btn btn-sm btn-primary"><img th:src="@{/images/logout.svg}" class="img-fluid">Logout</button>
+                    </form>
                 </div>
             </div>
             <div class="row">
