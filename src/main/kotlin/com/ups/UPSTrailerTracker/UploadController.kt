@@ -3,6 +3,7 @@ package com.ups.UPSTrailerTracker
 import com.ups.UPSTrailerTracker.storage.StorageService
 import com.ups.UPSTrailerTracker.trailer.Trailer
 import com.ups.UPSTrailerTracker.trailer.TrailerService
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException
 import org.apache.poi.ss.usermodel.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.io.IOException
 
 @Controller
 class UploadController {
@@ -49,10 +51,16 @@ class UploadController {
         return "redirect:/upload?success=$success"
     }
 
-    private fun extractTrailers(excelFile: String): ArrayList<Trailer> {
+    private fun extractTrailers(excelFile: String): ArrayList<Trailer>? {
         val trailers: ArrayList<Trailer> = ArrayList<Trailer>()
         //Process the excel file
-        val workbook: Workbook = WorkbookFactory.create(File(excelFile))
+        val workbook: Workbook = try {
+            WorkbookFactory.create(File(excelFile))
+        } catch(e: IOException){
+            null
+        } catch(e: InvalidFormatException){
+            null
+        } ?: return null
         val sheet: Sheet = workbook.getSheetAt(0)
         val rowIterator: Iterator<Row> = sheet.rowIterator()
 
