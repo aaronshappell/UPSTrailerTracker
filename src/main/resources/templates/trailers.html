@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
+    <link th:href="@{/css/trailers.css}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" th:src="@{/js/trailers.js}"></script>
 </head>
 <body>
     <div class="container" th:fragment="content">
@@ -14,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="trailer : ${trailers}">
+            <tr th:each="trailer : ${trailers}" class="clickable-row" th:data-href="@{${'/trailer/' + trailer.id}}">
                 <th scope="row" th:text="${trailer.trailerNumber}"></th>
                 <td th:text="${trailer.originNumber}"></td>
                 <td th:text="${trailer.volume}"></td>
