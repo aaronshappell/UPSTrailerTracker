@@ -22,22 +22,23 @@ class UploadController {
     lateinit var trailerService: TrailerService
 
     @GetMapping("/upload")
-    fun getUploadView(model: Model): String {
+    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success: String, model: Model): String {
         model.addAttribute("view", "upload")
         return "layout"
     }
 
     @PostMapping("/upload")
-    @ResponseBody
     fun uploadFile(@RequestParam("file") file: MultipartFile): String {
         storageService.store(file)
 
         val fileName: String = file.originalFilename as String
         var trailers: ArrayList<Trailer>? = null
+        var success: Boolean = false
         if(fileName.length >= 5 && fileName.substring(fileName.length - 5) == ".xlsx") {
             trailers = extractTrailers(storageService.load(fileName).toString())
         }
         if(trailers != null) {
+            success = true
             for(trailer in trailers) {
                 trailerService.addTrailer(trailer)
             }
@@ -45,7 +46,7 @@ class UploadController {
         storageService.deleteAll()
         storageService.init()
 
-        return "Successfully uploaded $fileName"
+        return "redirect:/upload?success=$success"
     }
 
     private fun extractTrailers(excelFile: String): ArrayList<Trailer> {
