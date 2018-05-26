@@ -27,10 +27,11 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/trailers")
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login?logout=true")
                 .permitAll()
         http.csrf().disable() // temporary for h2 db
         http.headers().frameOptions().disable() // temporary for h2 db
