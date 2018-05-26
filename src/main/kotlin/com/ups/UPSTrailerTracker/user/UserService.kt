@@ -25,7 +25,7 @@ class UserService : UserDetailsService {
     private fun getAuthorities(roles: ArrayList<String>): ArrayList<GrantedAuthority> {
         val authorities: ArrayList<GrantedAuthority> = ArrayList<GrantedAuthority>()
         for(role in roles){
-            authorities.add(SimpleGrantedAuthority(role))
+            authorities.add(SimpleGrantedAuthority("ROLE_$role"))
         }
         return authorities
     }

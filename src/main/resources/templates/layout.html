@@ -13,11 +13,12 @@
 <body>
     <div class="jumbotron text-center">
         <div class="container">
-            <div sec:authorize="isAuthenticated()" class="row justify-content-md-end">
+            <div sec:authorize="isAuthenticated()" class="row justify-content-sm-end">
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="col-sm-1">
+                    <a th:href="@{/upload}" class="btn btn-sm btn-primary">Upload</a>
+                </div>
                 <div class="col-sm-3">
-                    <form th:action="@{/logout}">
-                        <button type="submit" class="btn btn-sm btn-primary"><img th:src="@{/images/logout.svg}" class="img-fluid">Logout</button>
-                    </form>
+                    <a th:href="@{/logout}" class="btn btn-sm btn-primary"><img th:src="@{/images/logout.svg}" class="img-fluid">Logout</a>
                 </div>
             </div>
             <div class="row">
