@@ -11,7 +11,6 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 import java.io.IOException
@@ -23,32 +22,44 @@ class UploadController {
     @Autowired
     lateinit var trailerService: TrailerService
 
+    val maxFileSize: Long = 5242880 // 5MB
+
     @GetMapping("/upload")
-    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success: String, model: Model): String {
+    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success: String, @RequestParam(value = "error", defaultValue = "", required = false) error: String, model: Model): String {
         model.addAttribute("view", "upload")
         return "layout"
     }
 
     @PostMapping("/upload")
     fun uploadFile(@RequestParam("file") file: MultipartFile): String {
+        // don't store the file if it's too big
+        if(file.size > maxFileSize){
+            return "redirect:/upload?error=filesize"
+        }
         storageService.store(file)
 
         val fileName: String = file.originalFilename as String
         var trailers: ArrayList<Trailer>? = null
-        var success: Boolean = false
+        var error: String = ""
         if(fileName.length >= 5 && fileName.substring(fileName.length - 5) == ".xlsx") {
             trailers = extractTrailers(storageService.load(fileName).toString())
         }
         if(trailers != null) {
-            success = true
             for(trailer in trailers) {
                 trailerService.addTrailer(trailer)
             }
+        } else{
+            error = "invalidfile"
         }
         storageService.deleteAll()
         storageService.init()
 
-        return "redirect:/upload?success=$success"
+        // no error
+        if(error == ""){
+            return "redirect:/upload?success=true"
+        }
+
+        return "redirect:/upload?error=$error"
     }
 
     private fun extractTrailers(excelFile: String): ArrayList<Trailer>? {
