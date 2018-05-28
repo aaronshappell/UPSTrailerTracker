@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="trailer : ${trailers}" class="clickable-row" th:data-href="@{${'/trailer/' + trailer.id}}">
+            <tr th:each="trailer : ${trailers}" class="clickable-row" th:data-href="@{${'/trailers/' + trailer.id}}">
                 <th scope="row" th:text="${trailer.trailerNumber}"></th>
                 <td th:text="${trailer.originNumber}"></td>
                 <td th:text="${trailer.volume}"></td>

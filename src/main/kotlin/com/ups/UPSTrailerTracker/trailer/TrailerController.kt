@@ -28,14 +28,14 @@ class TrailerController {
     @ResponseBody
     fun getTrailerJSON(): ArrayList<Trailer> = trailerService.getTrailers()
 
-    @GetMapping("/trailer/{id}")
+    @GetMapping("/trailers/{id}")
     fun getTrailerView(@PathVariable("id") id: Long, model: Model): String {
         val trailer: Trailer? = trailerService.getTrailer(id)
         if(trailer != null) {
             model.addAttribute("trailer", trailer)
             model.addAttribute("view", "trailer")
         } else {
-            model.addAttribute("view", "noTrailer")
+            model.addAttribute("view", "trailermissing")
         }
         return "layout"
     }
