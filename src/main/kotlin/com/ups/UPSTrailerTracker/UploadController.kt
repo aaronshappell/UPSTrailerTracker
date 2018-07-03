@@ -3,27 +3,44 @@ package com.ups.UPSTrailerTracker
 import com.ups.UPSTrailerTracker.storage.StorageService
 import com.ups.UPSTrailerTracker.trailer.Trailer
 import com.ups.UPSTrailerTracker.trailer.TrailerService
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException
 import org.apache.poi.ss.usermodel.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.io.IOException
 
-@RestController
-class FileUploadController {
+@Controller
+class UploadController {
     @Autowired
     lateinit var storageService: StorageService
     @Autowired
     lateinit var trailerService: TrailerService
 
-    @PostMapping("/")
-    fun handleFileUpload(@RequestParam("file") file: MultipartFile): String {
+    val maxFileSize: Long = 5242880 // 5MB
+
+    @GetMapping("/upload")
+    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success: String, @RequestParam(value = "error", defaultValue = "", required = false) error: String, model: Model): String {
+        model.addAttribute("view", "upload")
+        return "layout"
+    }
+
+    @PostMapping("/upload")
+    fun uploadFile(@RequestParam("file") file: MultipartFile): String {
+        // don't store the file if it's too big
+        if(file.size > maxFileSize){
+            return "redirect:/upload?error=filesize"
+        }
         storageService.store(file)
 
         val fileName: String = file.originalFilename as String
         var trailers: ArrayList<Trailer>? = null
+        var error: String = ""
         if(fileName.length >= 5 && fileName.substring(fileName.length - 5) == ".xlsx") {
             trailers = extractTrailers(storageService.load(fileName).toString())
         }
@@ -31,17 +48,30 @@ class FileUploadController {
             for(trailer in trailers) {
                 trailerService.addTrailer(trailer)
             }
+        } else{
+            error = "invalidfile"
         }
         storageService.deleteAll()
         storageService.init()
 
-        return "Successfully uploaded $fileName"
+        // no error
+        if(error == ""){
+            return "redirect:/upload?success=true"
+        }
+
+        return "redirect:/upload?error=$error"
     }
 
-    fun extractTrailers(excelFile: String): ArrayList<Trailer> {
+    private fun extractTrailers(excelFile: String): ArrayList<Trailer>? {
         val trailers: ArrayList<Trailer> = ArrayList<Trailer>()
         //Process the excel file
-        val workbook: Workbook = WorkbookFactory.create(File(excelFile))
+        val workbook: Workbook = try {
+            WorkbookFactory.create(File(excelFile))
+        } catch(e: IOException){
+            null
+        } catch(e: InvalidFormatException){
+            null
+        } ?: return null
         val sheet: Sheet = workbook.getSheetAt(0)
         val rowIterator: Iterator<Row> = sheet.rowIterator()
 
@@ -93,7 +123,7 @@ class FileUploadController {
     }
 
     //Trims origin code into a 6 digit identification number.
-    fun trimTrailerNumber(rawNumber: String): Int {
+    private fun trimTrailerNumber(rawNumber: String): Int {
         val str: String = rawNumber.replace("[^\\d]".toRegex(), "")
         if(str.isEmpty()){
             return -1

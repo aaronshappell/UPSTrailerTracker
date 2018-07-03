@@ -27,10 +27,11 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/trailers")
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login?logout=true")
                 .permitAll()
         http.csrf().disable() // temporary for h2 db
         http.headers().frameOptions().disable() // temporary for h2 db
@@ -38,7 +39,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder) {
         userService.addUser(User("user", passwordEncoder().encode("password"), arrayListOf("USER")))
-        userService.addUser(User("test", passwordEncoder().encode("password"), arrayListOf("USER")))
+        userService.addUser(User("admin", passwordEncoder().encode("password"), arrayListOf("ADMIN")))
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder())
         /*
         auth.inMemoryAuthentication()

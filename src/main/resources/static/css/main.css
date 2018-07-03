@@ -1,0 +1,14 @@
+body {
+    padding-top: 100px;
+}
+
+#logo {
+    height: 50px;
+    width: auto;
+    padding-right: 15px;
+}
+
+.icon {
+    padding-left: 5px;
+    padding-right: 5px;
+}
