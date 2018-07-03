@@ -109,7 +109,9 @@ class UploadController {
                 }
                 values[i] = num
             }
-            trailers.add(Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(), values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6]))
+            if(values[0].toInt() != -1) {
+                trailers.add(Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(), values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6]))
+            }
             //Column 0 : Trailer Number : String
             //Column 1 : Origin Number : Double
             //Column 2 : Volume Number : Double
