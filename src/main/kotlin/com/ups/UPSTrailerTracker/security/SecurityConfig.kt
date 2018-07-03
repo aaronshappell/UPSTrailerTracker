@@ -21,7 +21,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/images/**", "/js/**").permitAll()
-                .antMatchers("/console/**").permitAll() // temporary for h2 db
+                .antMatchers("/console/**", "/").permitAll() // temporary for h2 db
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
