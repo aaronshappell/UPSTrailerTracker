@@ -25,7 +25,9 @@ class UploadController {
     val maxFileSize: Long = 5242880 // 5MB
 
     @GetMapping("/upload")
-    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success: String, @RequestParam(value = "error", defaultValue = "", required = false) error: String, model: Model): String {
+    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success:
+                      String, @RequestParam(value = "error", defaultValue = "", required = false)
+                      error: String, model: Model): String {
         model.addAttribute("view", "upload")
         return "layout"
     }
@@ -104,13 +106,15 @@ class UploadController {
                 } else if(cell.cellType == Cell.CELL_TYPE_FORMULA){
                     when(cell.cachedFormulaResultType){
                         Cell.CELL_TYPE_NUMERIC -> num = cell.numericCellValue
-                        Cell.CELL_TYPE_STRING -> if(cell.stringCellValue != ""){num = trimTrailerNumber(cell.stringCellValue).toDouble()}
+                        Cell.CELL_TYPE_STRING -> if(cell.stringCellValue != ""){num =
+                                trimTrailerNumber(cell.stringCellValue).toDouble()}
                     }
                 }
                 values[i] = num
             }
             if(values[0].toInt() != -1) {
-                trailers.add(Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(), values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6]))
+                trailers.add(Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(),
+                        values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6]))
             }
             //Column 0 : Trailer Number : String
             //Column 1 : Origin Number : Double
@@ -132,4 +136,8 @@ class UploadController {
         }
         return Integer.parseInt(str)
     }
+
+    //Returns if the passed trailer object is empty or not.
+    //@param trailer : Trailer being checked for empty values
+
 }
