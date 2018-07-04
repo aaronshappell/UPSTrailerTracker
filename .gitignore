@@ -1,3 +1,6 @@
+### Application Generated Files ###
+./upload
+
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
