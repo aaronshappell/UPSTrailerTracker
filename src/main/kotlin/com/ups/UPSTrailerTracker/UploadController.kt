@@ -25,9 +25,9 @@ class UploadController {
     val maxFileSize: Long = 5242880 // 5MB
 
     @GetMapping("/upload")
-    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success:
-                      String, @RequestParam(value = "error", defaultValue = "", required = false)
-                      error: String, model: Model): String {
+    fun getUploadView(@RequestParam(value = "success", defaultValue = "", required = false) success: String,
+                      @RequestParam(value = "error", defaultValue = "", required = false) error: String,
+                      model: Model): String {
         model.addAttribute("view", "upload")
         return "layout"
     }
