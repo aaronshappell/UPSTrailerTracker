@@ -5,5 +5,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 @ConfigurationProperties
 class StorageProperties {
     //The directory in which files are uploaded to
-    var location: String = "./uploadDir"
+    var location: String = "./upload"
 }
