@@ -18,9 +18,6 @@ class UpsTrailerTrackerApplication {
 		return CommandLineRunner {
 			storageService.deleteAll()
 			storageService.init()
-
-			trailerService.addTrailer(Trailer(123, 43653, 12000, 500, 35, 4, 11.0))
-			trailerService.addTrailer(Trailer(456, 32156, 13200, 230, 31, 2, 12.0))
 		}
 	}
 }

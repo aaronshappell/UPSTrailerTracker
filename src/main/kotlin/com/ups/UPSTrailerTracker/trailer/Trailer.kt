@@ -6,7 +6,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-data class Trailer(
+class Trailer(
     val trailerNumber: Int,
     val originNumber: Int,
     val volume: Int,
@@ -30,5 +30,11 @@ data class Trailer(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long = 0
-)
+
+    ) {
+
+    fun isEmpty(): Boolean {
+        return trailerNumber == -1
+    }
+}
 

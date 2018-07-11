@@ -95,7 +95,7 @@ class UploadController {
             for(i in 0..6){
                 val cell: Cell = cellIterator.next()
 
-                //Must check if the cell is a Formula or normal cell type.
+                //Must check if the cell is a formula or normal cell type.
                 if(cell.cellType == Cell.CELL_TYPE_NUMERIC){
                     num = cell.numericCellValue
                 } else if(cell.cellType == Cell.CELL_TYPE_STRING){
@@ -112,23 +112,29 @@ class UploadController {
                 }
                 values[i] = num
             }
-            if(values[0].toInt() != -1) {
-                trailers.add(Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(),
-                        values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6]))
-            }
-            //Column 0 : Trailer Number : String
-            //Column 1 : Origin Number : Double
-            //Column 2 : Volume Number : Double
-            //Column 3 : Smalls Number : Double
-            //Column 4 : Number of Bags : Double
-            //Column 5 : Number of Handles : Double
-            //Column 6 : Planned Hours : Double
-        }
 
+            //Create a temporary trailer to check if it's empty.
+            val tempTrailer = Trailer(values[0].toInt(), values[1].toInt(), values[2].toInt(),
+                    values[3].toInt(), values[4].toInt(), values[5].toInt(), values[6])
+
+            //Doesn't add trailer if it's empty.
+            if(!tempTrailer.isEmpty()) {
+                trailers.add(tempTrailer)
+            }
+
+            //Column 0 : Trailer Number
+            //Column 1 : Origin Number
+            //Column 2 : Volume Number
+            //Column 3 : Smalls Number
+            //Column 4 : Number of Bags
+            //Column 5 : Number of Handles
+            //Column 6 : Planned Hours
+        }
         return trailers
     }
 
     //Trims origin code into a 6 digit identification number.
+    //@param rawNumber : Value to be processed into a number.
     private fun trimTrailerNumber(rawNumber: String): Int {
         val str: String = rawNumber.replace("[^\\d]".toRegex(), "")
         if(str.isEmpty()){
@@ -136,8 +142,4 @@ class UploadController {
         }
         return Integer.parseInt(str)
     }
-
-    //Returns if the passed trailer object is empty or not.
-    //@param trailer : Trailer being checked for empty values
-
 }
